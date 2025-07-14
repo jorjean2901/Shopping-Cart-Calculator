@@ -37,14 +37,40 @@ public class ShoppingCartManualTest {
 
         // Test 3: คำนวณปกติ ไม่มีส่วนลด
         ArrayList<CartItem> simpleCart = new ArrayList<>();
-        simpleCart.add(new CartItem("NORMAL", "Bread", 25.0, 2)); // 50
-        simpleCart.add(new CartItem("NORMAL", "Milk", 15.0, 1));      // 15
+        simpleCart.add(new CartItem("NORMAL", "Bread", 25.0, 2)); // จ่าย 2 ชิ้น 50 บาท
+        simpleCart.add(new CartItem("NORMAL", "Milk", 15.0, 1));  // จ่าย 1 ชิ้น 15 บาท
         double total3 = ShoppingCartCalculator.calculateTotalPrice(simpleCart);
         if (total3 == 65.0) {
             System.out.println("PASSED: Simple cart total is correct (65.0)");
             passedCount++;
         } else {
             System.out.println("FAILED: Simple cart total expected 65.0 but got " + total3);
+            failedCount++;
+        }
+
+        // Test 4 : คำนวณตามกฎ BOGO (ซื้อสินค้า 1 แถม 1)
+        ArrayList<CartItem> FreeCart = new ArrayList<>();
+        FreeCart.add(new CartItem("BOGO", "Donut", 30.0, 2)); // จ่าย 1 ชิ้น 30 บาท แถม 1 ชิ้น
+        FreeCart.add(new CartItem("BOGO", "Green Tea", 20.0, 3)); // จ่าย 2 ชื้น 40 บาท แถม 1 ชิ้น
+        double total4 = ShoppingCartCalculator.calculateTotalPrice(FreeCart);
+        if (total4 == 70.0) {
+            System.out.println("PASSED: Free cart total is correct (70.0)");
+            passedCount++;
+        } else {
+            System.out.println("FAILED: Free cart total expected 70.0 but got" + total4);
+            failedCount++;
+        }
+
+        // Test 5 : คำนวณตามกฎ BULK (ซื้อสินค้า 6 ชิ้นขึ้นไป รับส่วนลด 10% จากราคารวมสินค้าชนิดนั้น)
+        ArrayList<CartItem> DiscountCart = new ArrayList<>();
+        DiscountCart.add(new CartItem("BULK", "Sope", 40.0, 10)); //(40*10)-10% = 360 บาท
+        DiscountCart.add(new CartItem("BULK", "Shampoo", 65.0,6 )); //(65*6)-10% = 351 บาท
+        double total5 = ShoppingCartCalculator.calculateTotalPrice(DiscountCart);
+        if (total5 == 711.0) {
+            System.out.println("PASSED: Discount cart total is correct (711.0)");
+            passedCount++;
+        } else {
+            System.out.println("FAILED: Discount cart total expected 711.0 but got " + total5);
             failedCount++;
         }
 
