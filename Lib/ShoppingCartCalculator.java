@@ -13,6 +13,12 @@ public class ShoppingCartCalculator {
      4.คิดราคาตาม Promotion "BLUK" ซื้อสินค้า 6 ชิ้นขึ้นไป รับส่วนลด 10% จากราคารวมสินค้าชนิดนั้น
      ex.ซื้อ Sope 10 ชิ้น ราคาชิ้นละ 40 บาท ราคารวม 400 บาท หักส่วนลด 10% (40*10)-10% = 360 บาท
      ราคาที่ต้องจ่ายทั้งหมด 360 บาท
+     * @param items รายการสินค้าที่อยู่ในตะกร้า ({ArrayList<CartItem>}) โดยแต่ละ {CartItem} มีคุณสมบัติดังนี้
+                    - price ราคาของสินค้า (ต้องไม่ติดลบหรือเท่ากับ 0) 
+                    - quantity จำนวนสินค้าที่ต้องการ (ต้องไม่ติดลบ) 
+                    - sku ประเภทโปรสินค้า ได้แก่ "BULK","BOGO","NORMAL" 
+                    - name ชื่อสินค้าต้อง (ห้ามเป็นค่าว่าง)
+     * @return ยอดรวมราคาทั้งหมดหลังคิดส่วนลด ถ้า input ไม่ถูกต้อง จะ return 0.0
      
      */
     public static double calculateTotalPrice(ArrayList<CartItem> items) {
